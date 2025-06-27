@@ -1,0 +1,220 @@
+[
+    {
+        "id": "88c82e3143964721",
+        "type": "inject",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 260,
+        "wires": [
+            [
+                "9530b9fc220a787e"
+            ]
+        ]
+    },
+    {
+        "id": "9530b9fc220a787e",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 1",
+        "func": "msg.payload = \"SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE'\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 260,
+        "wires": [
+            [
+                "bde8b566e338324a"
+            ]
+        ]
+    },
+    {
+        "id": "90fa8416cf80fdbe",
+        "type": "debug",
+        "z": "53c06688b597fa42",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 730,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "bde8b566e338324a",
+        "type": "MSSQL",
+        "z": "53c06688b597fa42",
+        "mssqlCN": "103da0cbbb16799e",
+        "name": "Pruebas",
+        "query": "",
+        "outField": "payload",
+        "x": 560,
+        "y": 300,
+        "wires": [
+            [
+                "90fa8416cf80fdbe"
+            ]
+        ]
+    },
+    {
+        "id": "cefca34dabdaa01f",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 3",
+        "func": "msg.payload = \"SELECT * FROM Plantillas\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 340,
+        "wires": [
+            [
+                "bde8b566e338324a"
+            ]
+        ]
+    },
+    {
+        "id": "989e536e5a6c9eac",
+        "type": "inject",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 340,
+        "wires": [
+            [
+                "cefca34dabdaa01f"
+            ]
+        ]
+    },
+    {
+        "id": "5e5b923b6c5387aa",
+        "type": "inject",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 190,
+        "y": 300,
+        "wires": [
+            [
+                "8c80c58b4a31fa11"
+            ]
+        ]
+    },
+    {
+        "id": "8c80c58b4a31fa11",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 2",
+        "func": "msg.payload = \"SELECT * FROM dbo.Table_1\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 300,
+        "wires": [
+            [
+                "bde8b566e338324a"
+            ]
+        ]
+    },
+    {
+        "id": "a82c791de61b1868",
+        "type": "comment",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "info": "Utiliza msg.payload para las querys",
+        "x": 360,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "2e98a4b961e7ff39",
+        "type": "comment",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "info": "Modificar las propiedades del servidor al utilizado",
+        "x": 560,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "48cb0aaa42195f6a",
+        "type": "comment",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "info": "paquetes: node-red-contrib-mssql",
+        "x": 460,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "103da0cbbb16799e",
+        "type": "MSSQL-CN",
+        "name": "Servidor",
+        "server": "192.168.1.49",
+        "encyption": false,
+        "database": "Pruebas"
+    }
+]

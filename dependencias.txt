@@ -1,0 +1,2 @@
+npm install discord.js Si se quiere utilizar discord // node-red-discord-alternative
+npm install  node-red-contrib-mssql Totalmente necesario // Equivalente de nodos node-red-contrib-mssql

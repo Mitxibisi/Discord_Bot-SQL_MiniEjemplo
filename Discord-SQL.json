@@ -1,0 +1,228 @@
+[
+    {
+        "id": "9530b9fc220a787e",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 1",
+        "func": "msg.payload = \"SELECT table_name FROM information_schema.tables WHERE table_type = 'BASE TABLE'\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 80,
+        "wires": [
+            [
+                "bde8b566e338324a"
+            ]
+        ]
+    },
+    {
+        "id": "90fa8416cf80fdbe",
+        "type": "debug",
+        "z": "53c06688b597fa42",
+        "name": "debug 1",
+        "active": true,
+        "tosidebar": true,
+        "console": true,
+        "tostatus": true,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "payload",
+        "statusType": "auto",
+        "x": 1150,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "bde8b566e338324a",
+        "type": "MSSQL",
+        "z": "53c06688b597fa42",
+        "mssqlCN": "103da0cbbb16799e",
+        "name": "Pruebas",
+        "query": "",
+        "outField": "payload",
+        "x": 980,
+        "y": 120,
+        "wires": [
+            [
+                "90fa8416cf80fdbe",
+                "7d899edf35097fbe"
+            ]
+        ]
+    },
+    {
+        "id": "cefca34dabdaa01f",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 3",
+        "func": "msg.payload = \"SELECT * FROM Plantillas\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 160,
+        "wires": [
+            [
+                "bde8b566e338324a"
+            ]
+        ]
+    },
+    {
+        "id": "8c80c58b4a31fa11",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 2",
+        "func": "msg.payload = \"SELECT * FROM dbo.Table_1\";\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 780,
+        "y": 120,
+        "wires": [
+            [
+                "bde8b566e338324a"
+            ]
+        ]
+    },
+    {
+        "id": "8d78699b6844b0af",
+        "type": "discord.event",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "client": "",
+        "event": "message",
+        "x": 100,
+        "y": 120,
+        "wires": [
+            [
+                "2e3156c4c1856a18"
+            ]
+        ]
+    },
+    {
+        "id": "2e3156c4c1856a18",
+        "type": "discord.botUser",
+        "z": "53c06688b597fa42",
+        "name": "GoodLife",
+        "client": "",
+        "destination": "botUser",
+        "desttype": "msg",
+        "x": 260,
+        "y": 120,
+        "wires": [
+            [
+                "1b2480d60a6570b3"
+            ]
+        ]
+    },
+    {
+        "id": "b923f0554d4b6556",
+        "type": "debug",
+        "z": "53c06688b597fa42",
+        "name": "debug 2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "partes",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 600,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "7d899edf35097fbe",
+        "type": "discord.send",
+        "z": "53c06688b597fa42",
+        "name": "Send",
+        "client": "",
+        "channel": "1335726985829290109",
+        "src": "str",
+        "x": 1130,
+        "y": 180,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "1b2480d60a6570b3",
+        "type": "function",
+        "z": "53c06688b597fa42",
+        "name": "function 4",
+        "func": "if (msg.payload.authorID !== msg.botUser.id)\n{\n    // Asegurarse de que msg.payload es un string\n    let texto = String(msg.payload.content);\n\n    // Verificar si el primer carácter es \"%\"\n    if (texto.charAt(0) === \"!\") {\n        // Dividir el texto por el símbolo \"%\"\n        msg.partes = texto.split(\"!\");\n        return msg;\n    }\n\n    // Si no empieza con \"!\", no continuar\n    return null;\n}\n\nreturn null;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 420,
+        "y": 120,
+        "wires": [
+            [
+                "6e6b25d8fe77a7b6",
+                "b923f0554d4b6556"
+            ]
+        ]
+    },
+    {
+        "id": "6e6b25d8fe77a7b6",
+        "type": "switch",
+        "z": "53c06688b597fa42",
+        "name": "",
+        "property": "partes[1]",
+        "propertyType": "msg",
+        "rules": [
+            {
+                "t": "eq",
+                "v": "Tabla",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Plantillas",
+                "vt": "str"
+            },
+            {
+                "t": "eq",
+                "v": "Tablas",
+                "vt": "str"
+            }
+        ],
+        "checkall": "false",
+        "repair": false,
+        "outputs": 3,
+        "x": 590,
+        "y": 120,
+        "wires": [
+            [
+                "9530b9fc220a787e"
+            ],
+            [
+                "8c80c58b4a31fa11"
+            ],
+            [
+                "cefca34dabdaa01f"
+            ]
+        ]
+    },
+    {
+        "id": "103da0cbbb16799e",
+        "type": "MSSQL-CN",
+        "name": "Servidor",
+        "server": "192.168.1.49",
+        "encyption": false,
+        "database": "Pruebas"
+    }
+]
